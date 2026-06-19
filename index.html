@@ -66,6 +66,7 @@
         /* Custom Scrollbar Mimarisi */
         ::-webkit-scrollbar {
             width: 8px;
+            height: 4px; /* Mobil yatay kaydırma çubuğu için */
         }
         ::-webkit-scrollbar-track {
             background: var(--bg-base);
@@ -185,6 +186,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-shrink: 0;
         }
 
         .brand-logo span {
@@ -204,6 +206,7 @@
             color: var(--text-muted);
             letter-spacing: -0.01em;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .nav-item a:hover, .nav-item a.active-link {
@@ -669,16 +672,23 @@
             .academy-cards-container { grid-template-columns: 1fr; gap: 24px; }
         }
 
+        /* GÜNCELLENDİ: Telefonlarda menüyü yok etmek yerine kaydırılabilir modern yatay banta çeviren mobil matrix */
         @media (max-width: 576px) {
-            .container { padding: 0 24px; }
-            .hero-statement h2 { font-size: 3.2rem; }
-            .togg-title { font-size: 2.5rem; }
+            .container { padding: 0 20px; }
+            .nav-wrapper { flex-direction: column; height: auto; padding: 12px 0; gap: 12px; }
+            .nav-menu { display: flex; width: 100%; overflow-x: auto; padding-bottom: 4px; justify-content: start; gap: 24px; -webkit-overflow-scrolling: touch; }
+            .nav-menu::-webkit-scrollbar { display: none; } /* Kaydırma çubuğunu gizle */
+            .hero-statement h2 { font-size: 3rem; }
+            .hero-statement p { font-size: 1.2rem; }
+            .togg-title { font-size: 2.2rem; }
             .dynamic-button-group { flex-direction: column; width: 100%; }
-            .btn-luxury { width: 100%; }
-            .nav-menu { display: none; }
-            .metric-matrix-row { grid-template-columns: 1fr; }
+            .btn-luxury { width: 100%; padding: 14px 28px; }
+            .metric-matrix-row { grid-template-columns: 1fr; margin-top: 20px; }
             .footer-grid-engine { grid-template-columns: 1fr; }
             .footer-bottom-tier { flex-direction: column; gap: 16px; text-align: center; }
+            .showcase-media-frame { height: 260px; }
+            .spatial-layout-split { gap: 24px; }
+            .asymmetrical-map-container { height: 350px; }
         }
     </style>
 </head>
@@ -755,7 +765,7 @@
                         </div>
                         <div class="showcase-content-block">
                             <h3>Junior Padel Squad</h3>
-                            <p>6-14 yaş sınırındaki genç yetenekler için padel el-göz koordinasyon senkronizasyonu, camdan dönüş reaksiyon hızı ve ileri seviye taktiksel çiftler oyun vizyonu.</p>
+                            <p>6-14 yaş sınırındaki genç yetenekler için padel el-göz koordinasyon senkronizasyonu, camdan dönüş reaksiyon hızı và ileri seviye taktiksel çiftler oyun vizyonu.</p>
                             <ul class="feature-bullet-stack">
                                 <li class="feature-bullet-item">
                                     <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
@@ -861,7 +871,7 @@
                 
                 <div class="faq-glass-box">
                     <h4 style="margin-bottom: 12px; font-size: 1.25rem;">Padel oynamak için tenis geçmişi şart mı?</h4>
-                    <p style="font-size: 1rem; color: #e2e2e7;">Kesinlikle hayır. Padel, tenis sporuna kıyasla öğrenme eğrisi çok daha hızlı, ralli dinamizmi yüksek og her yaş grubunun ilk seanstan itibaren keyifle oynayabileceği bir spordur.</p>
+                    <p style="font-size: 1rem; color: #e2e2e7;">Kesinlikle hayır. Padel, tenis sporuna kıyasla öğrenme eğrisi çok daha hızlı, ralli dinamizmi yüksek ve her yaş grubunun ilk seanstan itibaren keyifle oynayabileceği bir spordur.</p>
                 </div>
                 <div class="faq-glass-box">
                     <h4 style="margin-bottom: 12px; font-size: 1.25rem;">Kort kiralama ve raket desteği nasıl sağlanıyor?</h4>
