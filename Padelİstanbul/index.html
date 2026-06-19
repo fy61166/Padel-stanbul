@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padel İstanbul Spor Kulübü | Next-Gen Premium Padel Experience</title>
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM & ROOT VARIABLES (Togg & Apple Core Architecture)
+           ========================================================================== */
+        :root {
+            /* Color Palette */
+            --bg-base: #08080a;
+            --bg-surface-1: #121214;
+            --bg-surface-2: #1c1c1f;
+            --bg-surface-3: #2a2a2e;
+            
+            --accent-blue: #007aff;      /* Apple Neo-Tech Blue */
+            --tennis-lime: #8db600;      /* ERG High-Contrast Lime */
+            --premium-gold: #c5a059;     /* Togg Luxury Gold Accent */
+            
+            --text-pure: #ffffff;
+            --text-main: #f5f5f7;        /* San Francisco Font Standard */
+            --text-muted: #86868b;       /* Apple Muted Gray */
+            --text-dark: #1d1d1f;
+            
+            /* Glassmorphism Matrix */
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-bg-hover: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-premium: rgba(10, 10, 12, 0.7);
+            
+            /* Motion Profiles */
+            --bezier-epic: cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition-mid: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-slow: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ==========================================================================
+           2. GLOBAL RESETS & FOUNDATION
+           ========================================================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            background-color: var(--bg-base);
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            overflow-x: hidden;
+            transition: background-color var(--transition-mid);
+        }
+
+        /* Custom Scrollbar Mimarisi */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-base);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-surface-2);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-blue);
+        }
+
+        /* Typographic Foundation */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            color: var(--text-pure);
+            letter-spacing: -0.022em;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.5;
+            letter-spacing: -0.011em;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-fast);
+        }
+
+        /* ==========================================================================
+           3. ADVANCED UTILITIES & GLASSMORPHISM PATTERNS
+           ========================================================================== */
+        .premium-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            transition: var(--transition-mid);
+        }
+
+        .premium-glass:hover {
+            background: var(--glass-bg-hover);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+
+        .section-padding {
+            padding: 140px 0;
+        }
+
+        /* Ultra-Prestij Togg-Style Başlıkları */
+        .togg-title {
+            font-size: 4.5rem;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 0.95;
+            text-transform: uppercase;
+            background: linear-gradient(180deg, var(--text-pure) 30%, var(--text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 24px;
+        }
+
+        .subtitle-spec {
+            font-size: 1.25rem;
+            color: var(--tennis-lime);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        /* ==========================================================================
+           4. INTERACTIVE HEADER & NAVIGATION (Apple UI Pattern)
+           ========================================================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+            background: rgba(8, 8, 10, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            transition: var(--transition-fast);
+        }
+
+        header.scrolled {
+            background: rgba(5, 5, 5, 0.9);
+            padding: 10px 0;
+        }
+
+        .nav-wrapper {
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition-fast);
+        }
+
+        .brand-logo {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-logo span {
+            color: var(--tennis-lime);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-item a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: -0.01em;
+            cursor: pointer;
+        }
+
+        .nav-item a:hover, .nav-item a.active-link {
+            color: var(--text-pure);
+        }
+
+        /* ==========================================================================
+           5. SINGLE PAGE APPLICATION (SPA) CONTAINER ROUTING
+           ========================================================================== */
+        .spa-route {
+            display: none;
+            opacity: 0;
+            transform: scale(0.99) translateY(15px);
+            transition: opacity 0.8s var(--bezier-epic), transform 0.8s var(--bezier-epic);
+        }
+
+        .spa-route.active-route {
+            display: block;
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* ==========================================================================
+           6. CORE VIEW: HOME (The Immersion Hub)
+           ========================================================================== */
+        #view-home-panel {
+            padding-top: 0;
+        }
+
+        .cinema-hero {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, rgba(8,8,10,0.4) 0%, var(--bg-base) 100%), url('erg-kort.jpg') center center/cover no-repeat;
+            overflow: hidden;
+        }
+
+        .hero-statement {
+            text-align: center;
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        .hero-statement h2 {
+            font-size: 7rem;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            line-height: 0.9;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+        .hero-statement p {
+            font-size: 1.6rem;
+            color: var(--text-silver);
+            max-width: 650px;
+            margin: 0 auto 48px auto;
+            font-weight: 400;
+        }
+
+        .dynamic-button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn-luxury {
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-mid);
+        }
+
+        .btn-luxury.primary {
+            background: var(--text-pure);
+            color: var(--text-dark);
+            border: none;
+        }
+
+        .btn-luxury.primary:hover {
+            background: var(--tennis-lime);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(141, 182, 0, 0.3);
+        }
+
+        /* Performance Metric Matrices */
+        .metric-matrix-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: -80px;
+            position: relative;
+            z-index: 20;
+        }
+
+        .metric-data-card {
+            padding: 40px 32px;
+            text-align: center;
+        }
+
+        .metric-data-card .value {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .metric-data-card .label {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* Kenarlardan taşan, tam genişlikte aydınlık ellerasagi.png alanı */
+        .glass-panel-ellerasagi {
+            background: linear-gradient(180deg, rgba(8, 8, 10, 0.35) 0%, rgba(8, 8, 10, 0.35) 100%), url('ellerasagi.png') center center/cover no-repeat;
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            padding: 160px 10%;
+        }
+
+        /* ==========================================================================
+           7. CORE VIEW: TRAINING PORTFOLIO (Apple Grid Showcase)
+           ========================================================================== */
+        .showcase-interactive-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 48px;
+            margin-top: 60px;
+        }
+
+        .showcase-row-strip {
+            display: flex;
+            align-items: center;
+            gap: 64px;
+            padding: 48px;
+        }
+
+        .showcase-row-strip.inverted-flow {
+            flex-direction: row-reverse;
+        }
+
+        .showcase-media-frame {
+            flex: 1.2;
+            height: 480px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .showcase-media-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-slow);
+        }
+
+        .showcase-row-strip:hover .showcase-media-frame img {
+            transform: scale(1.04) rotate(0.5deg);
+        }
+
+        .showcase-content-block {
+            flex: 1;
+        }
+
+        .showcase-content-block h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .showcase-content-block p {
+            margin-bottom: 32px;
+        }
+
+        .feature-bullet-stack {
+            list-style: none;
+            display: grid;
+            gap: 16px;
+        }
+
+        .feature-bullet-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .feature-bullet-item svg {
+            width: 20px;
+            height: 20px;
+            color: var(--tennis-lime);
+            flex-shrink: 0;
+        }
+
+        /* ==========================================================================
+           8. CORE VIEW: ACADEMY DEEP DIVE (Premium Matrix Matrix)
+           ========================================================================== */
+        #view-academy-panel {
+            background: linear-gradient(180deg, rgba(8, 12, 16, 0.45) 0%, rgba(8, 12, 16, 0.45) 100%), url('vurus.png') center top/cover no-repeat fixed;
+            min-height: 100vh;
+            width: 100vw;
+        }
+
+        .academy-dynamic-strip {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            padding: 120px 10%;
+        }
+
+        .academy-cards-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .academy-spec-card {
+            background: rgba(10, 10, 12, 0.75);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 48px 32px;
+            transition: var(--transition-mid);
+        }
+
+        .academy-spec-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--tennis-lime);
+            background: rgba(14, 14, 18, 0.85);
+        }
+
+        .academy-spec-card h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--white);
+        }
+
+        .academy-spec-card .program-tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(141, 182, 0, 0.15);
+            color: var(--tennis-lime);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            letter-spacing: 0.05em;
+        }
+
+        .academy-spec-card ul {
+            list-style: none;
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .academy-spec-card ul li {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .academy-spec-card ul li span {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .faq-glass-box {
+            padding: 32px; 
+            margin-bottom: 16px; 
+            background: rgba(8, 8, 10, 0.75);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* ==========================================================================
+           9. CORE VIEW: CONTACT & INFRASTRUCTURE (Spatial Hub)
+           ========================================================================== */
+        .spatial-layout-split {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 48px;
+            margin-top: 48px;
+        }
+
+        .asymmetrical-map-container {
+            border-radius: 28px;
+            overflow: hidden;
+            height: 600px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+        }
+
+        .asymmetrical-map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .meta-details-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .detail-meta-node {
+            padding: 40px;
+        }
+
+        .detail-meta-node h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-pure);
+        }
+
+        .detail-meta-node p {
+            font-size: 1.1rem;
+            color: var(--text-silver);
+        }
+
+        /* ==========================================================================
+           10. FIXED INTERACTION REPOSITORIES (Floating Layer)
+           ========================================================================== */
+        .floating-action-whatsapp-node {
+            position: fixed;
+            right: 40px;
+            bottom: 40px;
+            width: 68px;
+            height: 68px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 16px 32px rgba(37, 211, 102, 0.3);
+            z-index: 999;
+            transition: var(--transition-mid);
+        }
+
+        .floating-action-whatsapp-node svg {
+            width: 32px;
+            height: 32px;
+            color: var(--white);
+        }
+
+        .floating-action-whatsapp-node:hover {
+            transform: scale(1.08) translateY(-4px);
+            box-shadow: 0 24px 48px rgba(37, 211, 102, 0.5);
+        }
+
+        /* ==========================================================================
+           11. SYSTEMIC COMPREHENSIVE FOOTER ARCHITECTURE
+           ========================================================================== */
+        footer {
+            background: #030304;
+            border-top: 1px solid var(--glass-border);
+            padding: 100px 0 50px 0;
+            margin-top: 140px;
+        }
+
+        .footer-grid-engine {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: 64px;
+            margin-bottom: 80px;
+        }
+
+        .footer-brand-column {
+            collapse: 1.5;
+        }
+
+        .footer-brand-column h4 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand-column p {
+            font-size: 0.95rem;
+            max-width: 280px;
+        }
+
+        .footer-nav-column h5 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .footer-nav-column ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .footer-nav-column ul a {
+            font-size: 0.95rem;
+            color: var(--text-silver);
+            cursor: pointer;
+        }
+
+        .footer-nav-column ul a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom-tier {
+            border-top: 1px solid rgba(255,255,255,0.03);
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           12. ULTRA-RESPONSIVE ADAPTATION MATRICES (Media Queries)
+           ========================================================================== */
+        @media (max-width: 1200px) {
+            .container { padding: 0 40px; }
+            .hero-statement h2 { font-size: 5rem; }
+            .togg-title { font-size: 3.5rem; }
+        }
+
+        @media (max-width: 992px) {
+            .metric-matrix-row { grid-template-columns: repeat(2, 1fr); margin-top: 40px; }
+            .showcase-row-strip, .showcase-row-strip.inverted-flow { flex-direction: column; gap: 40px; padding: 32px; }
+            .spatial-layout-split { grid-template-columns: 1fr; }
+            .asymmetrical-map-container { height: 400px; }
+            .footer-grid-engine { grid-template-columns: repeat(2, 1fr); gap: 48px; }
+            .academy-cards-container { grid-template-columns: 1fr; gap: 24px; }
+        }
+
+        @media (max-width: 576px) {
+            .container { padding: 0 24px; }
+            .hero-statement h2 { font-size: 3.2rem; }
+            .togg-title { font-size: 2.5rem; }
+            .dynamic-button-group { flex-direction: column; width: 100%; }
+            .btn-luxury { width: 100%; }
+            .nav-menu { display: none; }
+            .metric-matrix-row { grid-template-columns: 1fr; }
+            .footer-grid-engine { grid-template-columns: 1fr; }
+            .footer-bottom-tier { flex-direction: column; gap: 16px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="global-system-header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a onclick="spaRouter('view-home-panel', '#08080a')" class="brand-logo">PADEL <span>İSTANBUL</span></a>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a id="lnk-home" class="active-link" onclick="spaRouter('view-home-panel', '#08080a')">Ana Sayfa</a></li>
+                    <li class="nav-item"><a id="lnk-trainings" onclick="spaRouter('view-training-panel', '#0a120a')">Eğitimler</a></li>
+                    <li class="nav-item"><a id="lnk-academy" onclick="spaRouter('view-academy-panel', '#0a100d')">Akademi</a></li>
+                    <li class="nav-item"><a id="lnk-spatial" onclick="spaRouter('view-spatial-panel', '#0a0a0f')">İletişim</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <div id="view-home-panel" class="spa-route active-route">
+            <section class="cinema-hero">
+                <div class="hero-statement">
+                    <h2 style="letter-spacing: -4px;">Padelin Yeni Çağı.</h2>
+                    <p>Yüksek performanslı panoramik kort altyapısı, premium malzeme mühendisliği ve kişiselleştirilmiş padel analitiği.</p>
+                    <div class="dynamic-button-group">
+                        <button class="btn-luxury primary" onclick="spaRouter('view-training-panel', '#0a120a')">Programları Keşfet</button>
+                    </div>
+                </div>
+            </section>
+
+            <div class="container">
+                <section class="metric-matrix-row">
+                    <div class="metric-data-card premium-glass">
+                        <div class="value">09-23</div>
+                        <div class="label">Aktif Saatler</div>
+                    </div>
+                    <div class="metric-data-card premium-glass">
+                        <div class="value">4</div>
+                        <div class="label">Panoramik Kort</div>
+                    </div>
+                    <div class="metric-data-card premium-glass">
+                        <div class="value">%100</div>
+                        <div class="label">Ralli Dinamizmi</div>
+                    </div>
+                    <div class="metric-data-card premium-glass">
+                        <div class="value">Elit</div>
+                        <div class="label">Atmosfer</div>
+                    </div>
+                </section>
+            </div>
+
+            <section class="section-padding" style="overflow: hidden; padding-bottom: 0;">
+                <div class="glass-panel-ellerasagi" style="text-align: center;">
+                    <span class="subtitle-spec">Vizyon ve Akış</span>
+                    <h3 class="togg-title" style="margin-top: 10px;">Standartların Ötesinde.</h3>
+                    <p style="max-width: 750px; margin: 0 auto; color: var(--text-silver); font-weight: 500;">
+                        Padel İstanbul, geleneksel spor kulübü kalıplarını yıkarak dünyanın en hızlı büyüyen sporu padeli lüks segment veri analitiğiyle harmanlar. İstinye'nin kalbinde yer alan ekosistemimiz, cam ve duvar etkileşim optimizasyonundan biyometrik performans verilerine kadar her detayda kusursuzluğu hedefler.
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <div id="view-training-panel" class="spa-route">
+            <div class="container section-padding">
+                <span class="subtitle-spec">Gelişim Ekosistemi</span>
+                <h2 class="togg-title">Mühendislik Harikası Programlar.</h2>
+                
+                <div class="showcase-interactive-grid">
+                    <div class="showcase-row-strip premium-glass">
+                        <div class="showcase-media-frame">
+                            <img src="istockphoto-2156874409-612x612.jpg" alt="Junior Padel Squad">
+                        </div>
+                        <div class="showcase-content-block">
+                            <h3>Junior Padel Squad</h3>
+                            <p>6-14 yaş sınırındaki genç yetenekler için padel el-göz koordinasyon senkronizasyonu, camdan dönüş reaksiyon hızı ve ileri seviye taktiksel çiftler oyun vizyonu.</p>
+                            <ul class="feature-bullet-stack">
+                                <li class="feature-bullet-item">
+                                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    Uluslararası Sertifikasyonlu Akademik Pro Kadro
+                                </li>
+                                <li class="feature-bullet-item">
+                                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    Maksimum 4 Kişilik (Tam Kort Dengeli) Sınıflar
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="showcase-row-strip premium-glass inverted-flow">
+                        <div class="showcase-media-frame">
+                            <img src="dynamic-padel-player-serving-on-a-blue-court-under-sunny-sky-photo.jpg" alt="Executive Padel Club">
+                        </div>
+                        <div class="showcase-content-block">
+                            <h3>Executive Padel Club</h3>
+                            <p>İş dünyasının yüksek enerjisini ve network dinamizmini kortlara taşıyan, ralli süresi uzatma, Bandeja ve Vibora vuruş teknikleri odaklı lüks seanslar.</p>
+                            <ul class="feature-bullet-stack">
+                                <li class="feature-bullet-item">
+                                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    Dört Mevsim Kullanım Sunan Kapalı Kort Seçeneği
+                                </li>
+                                <li class="feature-bullet-item">
+                                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    Kulüp İçi "Americano" Turnuva Grupları
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="showcase-row-strip premium-glass">
+                        <div class="showcase-media-frame">
+                            <img src="images.jpeg" alt="1-1 Padel Mastery">
+                        </div>
+                        <div class="showcase-content-block">
+                            <h3>1-1 Biomechanical Padel Mastery</h3>
+                            <p>Tamamen size rezerve edilmiş taktiksel koçluk sistemi. Yüksek hızlı kamera analizleri yardımıyla duvar savunması, vole yerleşimi ve smaç açılarında milimetrik kusursuzluk.</p>
+                            <ul class="feature-bullet-stack">
+                                <li class="feature-bullet-item">
+                                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    Kişisel Akıllı Taktik Metrik Raporu
+                                </li>
+                                <li class="feature-bullet-item">
+                                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    Maç İçi Pozisyonel Video Analiz Desteği
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-academy-panel" class="spa-route">
+            <section class="section-padding" style="overflow: hidden; padding-bottom: 0;">
+                <div class="academy-dynamic-strip">
+                    <span class="subtitle-spec">Veri Matrisi & Performans</span>
+                    <h2 class="togg-title">Akademi Eğitim Akışları</h2>
+                    
+                    <div class="academy-cards-container">
+                        <div class="academy-spec-card">
+                            <span class="program-tag">Junior Squad</span>
+                            <h3>Padel Altyapı Grubu</h3>
+                            <p>Genç yaş grupları için refleks, koordinasyon ve cam etkileşimli temel eğitim.</p>
+                            <ul>
+                                <li><span>Yoğunluk:</span> 2 Seans / 60 dk</li>
+                                <li><span>Takip:</span> Reaksiyon Analizi</li>
+                                <li><span>Durum:</span> Kontenjan Açık</li>
+                            </ul>
+                        </div>
+
+                        <div class="academy-spec-card">
+                            <span class="program-tag">Executive Club</span>
+                            <h3>Yetişkin Performans</h3>
+                            <p>İş hayatının ritmine uygun, teknik vuruş kombinasyonları ve taktik seansları.</p>
+                            <ul>
+                                <li><span>Yoğunluk:</span> 3 Seans / 90 dk</li>
+                                <li><span>Takip:</span> Maç Kondisyon Matrisi</li>
+                                <li><span>Durum:</span> Sınırlı Kayıt</li>
+                            </ul>
+                        </div>
+
+                        <div class="academy-spec-card" style="border-color: var(--accent-blue);">
+                            <span class="program-tag" style="background: rgba(0, 122, 255, 0.15); color: var(--accent-blue);">Mastery Premium</span>
+                            <h3>1-1 Özel Padel Dersi</h3>
+                            <p>Bireysel taktik optimizasyonu, Bandeja, Vibora ve Smaç mekaniği uzmanlığı.</p>
+                            <ul>
+                                <li><span>Yoğunluk:</span> Kişiye Özel Esnek Plan</li>
+                                <li><span>Takip:</span> Kamera ve Video Analiz</li>
+                                <li><span>Durum:</span> Rezervasyon Aktif</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="container" style="padding-top: 80px; padding-bottom: 140px;">
+                <span class="subtitle-spec">Sıkça Sorulan Sorular</span>
+                <h3 class="togg-title" style="font-size: 2.8rem; margin-bottom: 40px;">Sistem Detayları</h3>
+                
+                <div class="faq-glass-box">
+                    <h4 style="margin-bottom: 12px; font-size: 1.25rem;">Padel oynamak için tenis geçmişi şart mı?</h4>
+                    <p style="font-size: 1rem; color: #e2e2e7;">Kesinlikle hayır. Padel, tenis sporuna kıyasla öğrenme eğrisi çok daha hızlı, ralli dinamizmi yüksek og her yaş grubunun ilk seanstan itibaren keyifle oynayabileceği bir spordur.</p>
+                </div>
+                <div class="faq-glass-box">
+                    <h4 style="margin-bottom: 12px; font-size: 1.25rem;">Kort kiralama ve raket desteği nasıl sağlanıyor?</h4>
+                    <p style="font-size: 1rem; color: #e2e2e7;">Kort rezervasyonlarınızı sağ alttaki WhatsApp hızlı hattı üzerinden koordine edebilirsiniz. Kulübümüz, serbest kort kiralamalarında premium raket ve top desteğini sağlamaktadır.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-spatial-panel" class="spa-route">
+            <div class="container section-padding">
+                <span class="subtitle-spec">Konumsal Entegrasyon</span>
+                <h2 class="togg-title">Fiziksel Merkezimiz.</h2>
+                
+                <div class="spatial-layout-split">
+                    <div class="asymmetrical-map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3005.1123456789!2d29.0229!3d41.1118!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDA2JzQyLjUiTiAyOcKwMDEnMjIuNCJF!5e0!3m2!1str!2str!4v1710000000000!5m2!1str!2str" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+
+                    <div class="meta-details-stack">
+                        <div class="detail-meta-node premium-glass">
+                            <h4>Lokasyon Bilgisi</h4>
+                            <p>Poligon Mahallesi, Poligon Caddesi No: 1/1, 34460 Sarıyer / İstanbul (İstanbul Avcılık ve Atıcılık Spor Kulübü Tesisleri Yanı)</p>
+                        </div>
+                        <div class="detail-meta-node premium-glass">
+                            <h4>Doğrudan Rezervasyon Hattı</h4>
+                            <p style="font-size: 1.8rem; font-weight: 800; color: var(--tennis-lime); margin-top: 8px;">
+                                <a href="tel:+905425714453">+90 542 571 44 53</a>
+                            </p>
+                        </div>
+                        <div class="detail-meta-node premium-glass">
+                            <h4>Erişilebilirlik Kriterleri</h4>
+                            <p>Tesisimiz tam fiziksel erişilebilirlik standartlarına sahip olup panoramik kort giriş platformları, tekerlekli sandalyeye uygun otopark ve sosyal alan entegrasyonu sunmaktadır.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <a href="https://wa.me/905425714453" class="floating-action-whatsapp-node" target="_blank" title="WhatsApp Business Cloud Connect">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 001.333 4.993L2 22l5.135-1.347a9.946 9.946 0 004.877 1.277h.005c5.505 0 9.988-4.478 9.99-9.985A9.983 9.983 0 0012.012 2zm5.723 14.122c-.244.688-1.201 1.249-1.657 1.289-.413.036-.954.05-1.52-.132a10.05 10.05 0 01-3.83-2.434 11.233 11.233 0 01-2.484-3.722c-.288-.49-.465-1.062-.465-1.658 0-1.644 1.258-1.921 1.543-1.921.204 0 .386.004.536.012.164.008.341-.04.492.324.204.496.697 1.698.758 1.822.06.124.1.267.016.434-.084.166-.126.267-.25.412-.125.146-.263.242-.375.377-.123.15-.252.308-.109.555.143.247.636 1.048 1.364 1.697.936.833 1.724 1.091 1.972 1.215.247.124.391.103.536-.062.145-.165.623-.726.79-1.016.166-.289.332-.242.559-.158.228.083 1.442.68 1.691.804.249.124.415.186.477.293.062.107.062.619-.182 1.307z"/>
+        </svg>
+    </a>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid-engine">
+                <div class="footer-brand-column">
+                    <h4>PADEL İSTANBUL</h4>
+                    <p>İstinye'nin premium spor ekosisteminde teknoloji ve atletik padel performansının kesişim noktası.</p>
+                </div>
+                <div class="footer-nav-column">
+                    <h5>Navigasyon</h5>
+                    <ul>
+                        <li><a onclick="spaRouter('view-home-panel', '#08080a')">Ana Sayfa</a></li>
+                        <li><a onclick="spaRouter('view-training-panel', '#0a120a')">Eğitimler</a></li>
+                        <li><a onclick="spaRouter('view-academy-panel', '#0a100d')">Akademi</a></li>
+                        <li><a onclick="spaRouter('view-spatial-panel', '#0a0a0f')">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-nav-column">
+                    <h5>Yasal Katman</h5>
+                    <ul>
+                        <li><a href="#">KVKK Sözleşmesi</a></li>
+                        <li><a href="#">Kullanım Şartları</a></li>
+                        <li><a href="#">Gizlilik İlkesi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-nav-column">
+                    <h5>Bülten Entegrasyonu</h5>
+                    <p style="font-size:0.85rem; margin-bottom:12px;">Premium etkinliklerden haberdar olun.</p>
+                    <input type="email" placeholder="E-posta Adresiniz" style="width:100%; padding:10px 14px; background:rgba(255,255,255,0.02); border:1px solid var(--glass-border); border-radius:8px; color:white; font-size:0.85rem;">
+                </div>
+            </div>
+            <div class="footer-bottom-tier">
+                <div>© 2026 Padel İstanbul | Next-Gen Spatial UI Platform. All Rights Reserved.</div>
+                <div style="display:flex; gap:24px;"><a href="#">Linkedin</a><a href="#">Instagram</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentTargetColor = "#08080a";
+
+        function spaRouter(targetRouteId, conceptualHexColor) {
+            currentTargetColor = conceptualHexColor;
+            
+            document.body.style.backgroundColor = conceptualHexColor;
+
+            document.querySelectorAll('.spa-route').forEach(routeNode => {
+                routeNode.classList.remove('active-route');
+            });
+            
+            const activeTargetNode = document.getElementById(targetRouteId);
+            if(activeTargetNode) {
+                activeTargetNode.classList.add('active-route');
+            }
+
+            document.querySelectorAll('.nav-item a').forEach(menuLink => {
+                menuLink.classList.remove('active-link');
+            });
+
+            const linkMap = {
+                'view-home-panel': 'lnk-home',
+                'view-training-panel': 'lnk-trainings',
+                'view-academy-panel': 'lnk-academy',
+                'view-spatial-panel': 'lnk-spatial'
+            };
+
+            const correspondingLinkId = linkMap[targetRouteId];
+            if(correspondingLinkId) {
+                document.getElementById(correspondingLinkId).classList.add('active-link');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const systemHeaderNode = document.getElementById('global-system-header');
+            const currentScrollYOffset = window.scrollY;
+
+            if (currentScrollYOffset > 50) {
+                systemHeaderNode.classList.add('scrolled');
+            } else {
+                systemHeaderNode.classList.remove('scrolled');
+            }
+
+            if (currentScrollYOffset > 800) {
+                document.body.style.backgroundColor = currentTargetColor === "#0a100d" ? "#050807" : "#020203"; 
+            } else {
+                document.body.style.backgroundColor = currentTargetColor; 
+            }
+        });
+    </script>
+</body>
+</html>
