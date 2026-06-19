@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Padel İstanbul Spor Kulübü | Next-Gen Premium Padel Experience</title>
+    <link rel="icon" type="image/jpeg" href="icon.jpg">
     <style>
         /* ==========================================================================
            1. DESIGN SYSTEM & ROOT VARIABLES (Togg & Apple Core Architecture)
@@ -66,7 +67,7 @@
         /* Custom Scrollbar Mimarisi */
         ::-webkit-scrollbar {
             width: 8px;
-            height: 4px; /* Mobil yatay kaydırma çubuğu için */
+            height: 4px;
         }
         ::-webkit-scrollbar-track {
             background: var(--bg-base);
@@ -672,12 +673,11 @@
             .academy-cards-container { grid-template-columns: 1fr; gap: 24px; }
         }
 
-        /* GÜNCELLENDİ: Telefonlarda menüyü yok etmek yerine kaydırılabilir modern yatay banta çeviren mobil matrix */
         @media (max-width: 576px) {
             .container { padding: 0 20px; }
             .nav-wrapper { flex-direction: column; height: auto; padding: 12px 0; gap: 12px; }
             .nav-menu { display: flex; width: 100%; overflow-x: auto; padding-bottom: 4px; justify-content: start; gap: 24px; -webkit-overflow-scrolling: touch; }
-            .nav-menu::-webkit-scrollbar { display: none; } /* Kaydırma çubuğunu gizle */
+            .nav-menu::-webkit-scrollbar { display: none; }
             .hero-statement h2 { font-size: 3rem; }
             .hero-statement p { font-size: 1.2rem; }
             .togg-title { font-size: 2.2rem; }
@@ -765,7 +765,7 @@
                         </div>
                         <div class="showcase-content-block">
                             <h3>Junior Padel Squad</h3>
-                            <p>6-14 yaş sınırındaki genç yetenekler için padel el-göz koordinasyon senkronizasyonu, camdan dönüş reaksiyon hızı và ileri seviye taktiksel çiftler oyun vizyonu.</p>
+                            <p>6-14 yaş sınırındaki genç yetenekler için padel el-göz koordinasyon senkronizasyonu, camdan dönüş reaksiyon hızı ve ileri seviye taktiksel çiftler oyun vizyonu.</p>
                             <ul class="feature-bullet-stack">
                                 <li class="feature-bullet-item">
                                     <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
@@ -931,7 +931,7 @@
                     <p>İstinye'nin premium spor ekosisteminde teknoloji ve atletik padel performansının kesişim noktası.</p>
                 </div>
                 <div class="footer-nav-column">
-                    <h5>Navigasyon</h5>
+                    ##### Navigasyon
                     <ul>
                         <li><a onclick="spaRouter('view-home-panel', '#08080a')">Ana Sayfa</a></li>
                         <li><a onclick="spaRouter('view-training-panel', '#0a120a')">Eğitimler</a></li>
@@ -940,7 +940,7 @@
                     </ul>
                 </div>
                 <div class="footer-nav-column">
-                    <h5>Yasal Katman</h5>
+                    ##### Yasal Katman
                     <ul>
                         <li><a href="#">KVKK Sözleşmesi</a></li>
                         <li><a href="#">Kullanım Şartları</a></li>
@@ -948,7 +948,7 @@
                     </ul>
                 </div>
                 <div class="footer-nav-column">
-                    <h5>Bülten Entegrasyonu</h5>
+                    ##### Bülten Entegrasyonu
                     <p style="font-size:0.85rem; margin-bottom:12px;">Premium etkinliklerden haberdar olun.</p>
                     <input type="email" placeholder="E-posta Adresiniz" style="width:100%; padding:10px 14px; background:rgba(255,255,255,0.02); border:1px solid var(--glass-border); border-radius:8px; color:white; font-size:0.85rem;">
                 </div>
